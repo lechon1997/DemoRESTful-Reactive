@@ -29,4 +29,11 @@ public class WidgetService {
     public Mono<Widget> findById(String id) {
         return repository.findById(id);
     }
+
+    public Mono<DtoWidget> updateWidget(Mono<DtoWidget> widgetMono, String id){
+        return repository.findById(id)
+                .flatMap(p -> widgetMono.map(util::dtoToEntity).doOnNext(e->e.setId(id)))
+                .flatMap(repository::save)
+                .map((util::entityToDto));
+    }
 }

@@ -26,4 +26,10 @@ public class ControllerWidget {
     public Mono<DtoWidget> saveWidget(@RequestBody Mono<DtoWidget> dtoWidgetMono){
         return service.saveWidget(dtoWidgetMono);
     }
+
+    @PutMapping("/update/{id}")
+    public Mono<DtoWidget> updateWidget(@RequestBody Mono<DtoWidget> dtoWidgetMono, @PathVariable String id){
+        return service.updateWidget(dtoWidgetMono, id);
+    }
+
 }
